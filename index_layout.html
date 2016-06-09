@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Audio Data Visualization</title>
+
+    <!-- Lib-->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- Custom -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/custom-chart.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+
+
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+
+    </head>
+
+    <body>
+
+        <div id="wrapper">
+
+            <!-- Navigation -->
+            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Audio Data Visualization</a>
+                </div>
+                <!-- /.navbar-header -->
+            </nav>
+
+            <div id="page-wrapper">
+                <div class="row m-t-s">
+
+                    <!-- Middle Controls -->
+                    <div class="col-lg-8">
+                        <!-- Data Visualization -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Data Visualization
+                            </div>
+                            <div class="panel-body">
+                                <div id="scatter"></div>
+                            </div>
+                        </div>
+                        <!-- / Data Visualization -->
+
+                        <!-- Current View Plots -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-bar-chart-o fa-fw"></i> Node Links
+                            </div>
+                            <div class="panel-body">
+                                <h1>Node Table Links Here</h1>
+                            </div>
+                        </div>
+                        <!-- /Current View Plots -->
+                    </div>
+                    <!-- / Middle Controls -->
+
+
+                    <!-- Right Side Controls -->
+                    <div class="col-lg-4">
+                        <!-- Controls -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <i class="fa fa-edit fa-fw"></i> Node Management
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label>Weight</label>
+                                    <input class="form-control " type="number" id="weightInput" step="1" min="0" max="100" required="required"/>
+                                </div>
+                                <div class="form-group">
+                                    <label>Label</label>
+                                    <input class="form-control " type="text" id="labelInput" required="required"/>
+                                </div>
+
+                                <button class="btn btn-info" id="saveEditBtn">Save</button>
+                                <button class="btn btn-default" id="cancelEditBtn">Cancel</button>
+                                <button class="btn btn-danger" id="deleteEditBtn">Delete</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- / Right Side Controls -->
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Libs -->
+        <script src="lib/jquery/js/jquery.min.js"></script>
+        <script src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script src="lib/d3/js/d3.js"></script>
+        <script src="lib/lodash/js/lodash.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+        <script type="text/javascript">
+        toastr.options = {
+          "positionClass": "toast-top-center",
+        }
+        </script>
+
+        <!-- Custom Theme JavaScript -->
+        <script src="js/audioDataRepository.js"></script>
+        <script src="js/audioDataScatterPlot.js"></script>
+
+    </body>
+
+    </html>

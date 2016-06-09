@@ -1,0 +1,38 @@
+svg {
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+svg {
+  cursor: crosshair;
+}
+
+.draggable {
+  cursor: move;
+}
+
+circle.selected {
+  fill: lightgreen;
+}
+
+.link {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node {
+  cursor: move;
+  fill: #ccc;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.node.fixed {
+  fill: #f00;
+}
+
