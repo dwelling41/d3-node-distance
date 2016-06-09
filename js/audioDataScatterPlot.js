@@ -74,8 +74,9 @@ function drawContent() {
 
   // update existing nodes 
   node.selectAll('circle')
+    .attr('fill', function(d) { return d.nodeColor; })
     .classed('selected', function(d) { return d === currentlySelectedNode; });
-
+    ;
 
 
   node.selectAll('text.nodeWeight')
@@ -100,6 +101,7 @@ function drawContent() {
     .call(drag);
 
   g.append('svg:circle')
+    .attr('fill', function(d) { return d.nodeColor; })
     .attr('class', 'node')
     .attr('r', 25)
 
@@ -144,6 +146,9 @@ function onContentMousedown() {
     return;
   };
 
+  // Get the node color
+  var nodeColor = "#cccccc";
+
   // Create the new node
   var point = d3.mouse(this)
   var node = {
@@ -152,7 +157,8 @@ function onContentMousedown() {
     y: point[1],
     fixed: true,
     label: $('#labelInput').val(),
-    nodeWeight: parseInt($('#weightInput').val())
+    nodeWeight: parseInt($('#weightInput').val()),
+    nodeColor: nodeColor
   };
 
   // Add the node to the tracked list
@@ -183,18 +189,23 @@ function onRightClickNode(clickedNode) {
     // Fill properties
     $('#weightInput').val(clickedNode.nodeWeight);
     $('#labelInput').val(clickedNode.label);
+    $('#colorInput').colorpicker('setValue', clickedNode.nodeColor);
 
     // Show save button and put in edit mode
     inEditMode = true;
     $('#saveEditBtn').show();
     $('#cancelEditBtn').show();
     $('#deleteEditBtn').show();
+    $('#colorInputGroup').show();
 
     //Refresh
     drawContent();
 }
 
 function initialize() {
+  // Setup color picker
+  $('#colorInput').colorpicker();
+
   // Set default values
   resetNodeManagementControls();
 
@@ -202,6 +213,8 @@ function initialize() {
   $('#saveEditBtn').on('click', onSaveEdit);
  $('#cancelEditBtn').on('click', onCancelEdit);
  $('#deleteEditBtn').on('click', onDeleteEdit);
+
+
 
 
 drawContent();
@@ -219,6 +232,7 @@ function onSaveEdit() {
   // Save off values
   currentlySelectedNode.label = $('#labelInput').val();
   currentlySelectedNode.nodeWeight = parseInt($('#weightInput').val());
+  currentlySelectedNode.nodeColor = $('#colorInput').colorpicker('getValue');
 
   // Clear the input
   resetNodeManagementControls();
@@ -276,6 +290,8 @@ function resetNodeManagementControls() {
   $('#saveEditBtn').hide();
   $('#cancelEditBtn').hide();
   $('#deleteEditBtn').hide();
+  $('#colorInputGroup').hide();
+  $('#colorInput').colorpicker('setValue', '#00aabb');
   inEditMode = false;
 }
 

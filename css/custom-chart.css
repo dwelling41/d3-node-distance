@@ -17,7 +17,15 @@ svg {
 }
 
 circle.selected {
-  fill: lightgreen;
+  stroke: #000;
+  stroke-width: 5px;
+  stroke-dasharray: 10,5;
+}
+
+.node {
+  cursor: move;
+  stroke: #000;
+  stroke-width: 1.5px;
 }
 
 .link {
@@ -25,12 +33,7 @@ circle.selected {
   stroke-width: 1.5px;
 }
 
-.node {
-  cursor: move;
-  fill: #ccc;
-  stroke: #000;
-  stroke-width: 1.5px;
-}
+
 
 .node.fixed {
   fill: #f00;
