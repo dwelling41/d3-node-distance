@@ -271,8 +271,8 @@ function onDeleteEdit() {
 
 function resetNodeManagementControls() {
   // Setup initial control values
-  $('#weightInput').val('');
-  $('#labelInput').val('');
+  $('#weightInput').val('100');
+  $('#labelInput').val('tag_' + (lastNodeId + 1));
   $('#saveEditBtn').hide();
   $('#cancelEditBtn').hide();
   $('#deleteEditBtn').hide();
