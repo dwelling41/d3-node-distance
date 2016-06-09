@@ -1,3 +1,7 @@
+
+var DEGREES_TO_RADIANS = Math.PI/180;
+var RADIANS_TO_DEGREES = 180/Math.PI;
+
 // Determines if a node is being dragged
 var isNodeDragging = false;
 
@@ -146,11 +150,13 @@ function onContentMousedown() {
     return;
   };
 
+  // Get the nodes position
+  var point = d3.mouse(this)
+
   // Get the node color
-  var nodeColor = "#cccccc";
+  var nodeColor = getInitialColor(point[0], point[1]);
 
   // Create the new node
-  var point = d3.mouse(this)
   var node = {
     id: ++lastNodeId,
     x: point[0],
@@ -172,6 +178,35 @@ function onContentMousedown() {
 
   toastr.success("Node created!");
 }
+
+
+// [min, max] => [floor, ceil]
+// ((ceil - floor) * (x - minimum))/(maximum - minimum) + floor
+function normalize(value, min, max, floor, ceiling ){
+  return ((ceiling - floor) * (value - min))/(max - min) + floor;
+}
+
+function getInitialColor(x, y) {
+  // Map our coordinates of [0, Width] and [0, Height] to [-W/2, W/2] and [-H/2, H/2] to give a full range of HSL angles
+  var coord_x = normalize(x, 0, width, -width/2, width/2);
+  var coord_y = normalize(y, 0, height, height/2, -height/2);
+
+  // Get polar coordinates
+  var radius = Math.sqrt(Math.pow(coord_x, 2) + Math.pow(coord_y, 2));
+  var max_radius = Math.sqrt(Math.pow(width/2, 2) + Math.pow(height/2, 2));
+  var radius_normalized = normalize(radius, 0, max_radius, 0, 100);
+
+  var theta =  Math.atan2(coord_y, coord_x);
+  var theta_360 = (theta > 0 ? theta : (2*Math.PI + theta)) * 360 / (2*Math.PI)
+
+  // Return the HSL as hex
+  var hslString = "hsl(" + theta_360 + ", " + radius_normalized + "%," + "50%)"; 
+  var color = "#" + tinycolor(hslString).toHex();
+
+  console.log(color);
+  return color;
+}
+
 
 function onRightClickNode(clickedNode) {
   // Stop normal events
@@ -213,9 +248,6 @@ function initialize() {
   $('#saveEditBtn').on('click', onSaveEdit);
  $('#cancelEditBtn').on('click', onCancelEdit);
  $('#deleteEditBtn').on('click', onDeleteEdit);
-
-
-
 
 drawContent();
    
